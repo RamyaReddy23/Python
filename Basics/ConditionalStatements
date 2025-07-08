@@ -1,0 +1,9 @@
+
+score = 85
+
+if score >= 90:
+    print("Excellent")
+elif score >= 75:
+    print("Good")
+else:
+    print("Needs Improvement")
