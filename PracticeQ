@@ -1,1 +1,20 @@
-
+  1. Implement the Binary Search for the DSA Algorithm
+	2. Can you Implement a Multi-threaded Merge Sort
+	3. How to create RESTFul API to add , Insert user name, id in springboot
+	4. Implement the Quicksort Algorithm
+	5. Implement a RESTful API for a Todo List Application
+	6. Given an array of integers, find the highest product you can get from three of the integers
+	7. Write a method to check that a binary tree ↴ is a valid binary search tree
+	8. Write a method fib() that takes an integer nn and returns the nnth Fibonacci ↴ number
+	9. Using Python Unit Tests with pytest      please write tests for a User class that tracks whether individuals can vote or not
+	10. Write a function to find the 2nd largest element in a binary search tree.
+	11. Implement the Heap Sort Algorithm
+	12. Implement the Smallest/Largest Element in an Unsorted Array
+	13. Implement the Quicksort Algorithm
+	14. Implement a RESTful API for a Todo List Application
+	15. Implement a RESTful API using a framework like Spring Boot - for Create a new task with details like title, description, due date, and priority.
+	16. Implement a RESTful API for an Online Learning Platform - add a new course with details like course title, description, instructor, and curriculum
+	17. Implement the Odd-Even Sort Algorithm
+	18. implement a RESTful API using a framework like Spring Boot for a book review application
+	19. How can we get the nth highest number of orders a single customer has?
+	20. JUnit 5 is the foundation of Java testing. Implement to test a password validator
