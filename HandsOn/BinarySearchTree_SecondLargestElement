@@ -1,0 +1,34 @@
+#function to find the 2nd largest element in a binary search tree.
+
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def find_second_largest(root):
+    def reverse_inorder(node):
+        nonlocal count, second_largest
+        if not node or count >= 2:
+            return
+        reverse_inorder(node.right)
+        count += 1
+        if count == 2:
+            second_largest = node.key
+            return
+        reverse_inorder(node.left)
+
+    count = 0
+    second_largest = None
+    reverse_inorder(root)
+    return second_largest
+
+# Example usage
+if __name__ == "__main__":
+    root = Node(50)
+    root.left = Node(30)
+    root.right = Node(70)
+    root.right.left = Node(60)
+    root.right.right = Node(80)
+
+    print("Second largest element:", find_second_largest(root))
