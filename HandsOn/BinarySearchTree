@@ -1,0 +1,29 @@
+#Write a method to check that a binary tree ↴ is a valid binary search tree
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_valid_bst(root):
+    def validate(node, low=float('-inf'), high=float('inf')):
+        if not node:
+            return True
+        if not (low < node.val < high):
+            return False
+        return (validate(node.left, low, node.val) and
+                validate(node.right, node.val, high))
+    
+    return validate(root)
+
+# Example usage:
+# Constructing a simple BST
+#       5
+#      / \
+#     3   7
+root = TreeNode(5)
+root.left = TreeNode(3)
+root.right = TreeNode(7)
+
+print("Is valid BST:", is_valid_bst(root))
