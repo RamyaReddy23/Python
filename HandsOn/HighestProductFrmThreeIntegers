@@ -1,0 +1,14 @@
+
+def highest_product_of_three(nums):
+    if len(nums) < 3:
+        raise ValueError("Need at least three numbers")
+
+    nums.sort()
+    # Either the product of the three largest numbers
+    # or the product of two smallest (possibly negative) and the largest
+    return max(nums[-1] * nums[-2] * nums[-3], nums[0] * nums[1] * nums[-1])
+
+# Example usage
+arr = [-10, -20, 5, 2, 8, 7]
+result = highest_product_of_three(arr)
+print("Highest product of three numbers:", result)
