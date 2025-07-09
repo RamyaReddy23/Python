@@ -1,0 +1,14 @@
+##Implement the Quicksort Algorithm
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]  # Choose the first element as the pivot
+        less_than_pivot = [x for x in arr[1:] if x <= pivot]
+        greater_than_pivot = [x for x in arr[1:] if x > pivot]
+        return quicksort(less_than_pivot) + [pivot] + quicksort(greater_than_pivot)
+
+# Example usage
+data = [33, 10, 55, 71, 29, 3, 18]
+sorted_data = quicksort(data)
+print("Sorted array:", sorted_data)
