@@ -1,0 +1,63 @@
+#Implement a RESTful API for an Online Learning Platform - add a new course with details like course title, description, instructor, and curriculum
+
+pip install flask
+
+
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# In-memory storage for courses
+courses = []
+next_id = 1
+
+# Add a new course
+@app.route('/api/courses', methods=['POST'])
+def add_course():
+    global next_id
+    data = request.get_json()
+
+    title = data.get('title')
+    description = data.get('description')
+    instructor = data.get('instructor')
+    curriculum = data.get('curriculum')  # Can be a list or string
+
+    if not title or not instructor:
+        return jsonify({'error': 'Title and instructor are required'}), 400
+
+    course = {
+        'id': next_id,
+        'title': title,
+        'description': description,
+        'instructor': instructor,
+        'curriculum': curriculum
+    }
+
+    courses.append(course)
+    next_id += 1
+    return jsonify(course), 201
+
+# Get all courses
+@app.route('/api/courses', methods=['GET'])
+def get_courses():
+    return jsonify(courses)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+#POST to http://localhost:5000/api/courses
+
+{
+  "title": "Python for Beginners",
+  "description": "An introductory course to Python programming.",
+  "instructor": "Dr. Ramya V.",
+  "curriculum": [
+    "Introduction to Python",
+    "Data Types and Variables",
+    "Control Flow",
+    "Functions and Modules",
+    "File Handling"
+  ]
+}
