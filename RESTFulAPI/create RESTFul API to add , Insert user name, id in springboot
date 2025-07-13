@@ -1,0 +1,66 @@
+#	3. How to create RESTFul API to add , Insert user name, id in springboot
+
+
+#Create User Model
+
+public class User {
+    private Long id;
+    private String name;
+
+    // Constructors
+    public User() {}
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+#create a controller
+
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    private List<User> users = new ArrayList<>();
+
+    @PostMapping("/add")
+    public String addUser(@RequestBody User user) {
+        users.add(user);
+        return "User added successfully!";
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return users;
+    }
+}
+
+
+#Main Application Class
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class UserApiApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(UserApiApplication.class, args);
+    }
+}
+#Example Request:
+
+curl -X POST http://localhost:8080/api/users/add \
+-H "Content-Type: application/json" \
+-d '{"id": 1, "name": "Ramya"}'
+
+
