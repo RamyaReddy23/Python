@@ -1,0 +1,22 @@
+#Implement the Smallest/Largest Element in an Unsorted Array
+
+
+def find_smallest_largest(arr):
+    if not arr:
+        return None, None  # Handle empty array
+
+    smallest = largest = arr[0]
+
+    for num in arr[1:]:
+        if num < smallest:
+            smallest = num
+        elif num > largest:
+            largest = num
+
+    return smallest, largest
+
+# Example usage
+arr = [34, 12, 89, 5, 77, 23]
+smallest, largest = find_smallest_largest(arr)
+print(f"Smallest element: {smallest}")
+print(f"Largest element: {largest}")
