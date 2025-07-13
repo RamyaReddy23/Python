@@ -1,0 +1,56 @@
+#implement a RESTful API using a framework like Spring Boot for a book review application
+
+
+pip install flask
+
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# In-memory storage for book reviews
+reviews = []
+next_id = 1
+
+# Add a new book review
+@app.route('/api/reviews', methods=['POST'])
+def add_review():
+    global next_id
+    data = request.get_json()
+
+    title = data.get('title')
+    description = data.get('description')
+    reviewer = data.get('reviewer')
+    rating = data.get('rating')  # e.g., 1 to 5
+
+    if not title or not reviewer or rating is None:
+        return jsonify({'error': 'Title, reviewer, and rating are required'}), 400
+
+    review = {
+        'id': next_id,
+        'title': title,
+        'description': description,
+        'reviewer': reviewer,
+        'rating': rating
+    }
+
+    reviews.append(review)
+    next_id += 1
+    return jsonify(review), 201
+
+# Get all reviews
+@app.route('/api/reviews', methods=['GET'])
+def get_reviews():
+    return jsonify(reviews)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+#POST to http://localhost:5000/api/reviews
+{
+  "title": "Clean Code",
+  "description": "A great book on writing maintainable software.",
+  "reviewer": "Ramya",
+  "rating": 5
+}
+
