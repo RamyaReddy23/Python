@@ -1,0 +1,64 @@
+#Implement a RESTful API using a framework like Spring Boot - for Create a new task with details like title, description, due date, and priority.
+
+pip install flask
+
+
+
+from flask import Flask, request, jsonify
+from datetime import datetime
+
+app = Flask(__name__)
+
+# In-memory task storage
+tasks = []
+next_id = 1
+
+# Create a new task
+@app.route('/api/tasks', methods=['POST'])
+def create_task():
+    global next_id
+    data = request.get_json()
+
+    title = data.get('title')
+    description = data.get('description')
+    due_date = data.get('due_date')  # Expected format: 'YYYY-MM-DD'
+    priority = data.get('priority')  # e.g., 'Low', 'Medium', 'High'
+
+    if not title or not due_date or not priority:
+        return jsonify({'error': 'Title, due date, and priority are required'}), 400
+
+    try:
+        due_date_obj = datetime.strptime(due_date, '%Y-%m-%d')
+    except ValueError:
+        return jsonify({'error': 'Invalid date format. Use YYYY-MM-DD'}), 400
+
+    task = {
+        'id': next_id,
+        'title': title,
+        'description': description,
+        'due_date': due_date_obj.strftime('%Y-%m-%d'),
+        'priority': priority,
+        'completed': False
+    }
+
+    tasks.append(task)
+    next_id += 1
+    return jsonify(task), 201
+
+# Get all tasks
+@app.route('/api/tasks', methods=['GET'])
+def get_tasks():
+    return jsonify(tasks)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#POST to http://localhost:5000/api/tasks
+
+
+
+{
+  "title": "Finish report",
+  "description": "Complete the quarterly quality report",
+  "due_date": "2025-07-20",
+  "priority": "High"
+}
