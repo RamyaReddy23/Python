@@ -1,0 +1,37 @@
+# 9. Using Python Unit Tests with pytest      please write tests for a User class that tracks whether individuals can vote or not
+
+#class to be tested
+
+class User:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def can_vote(self):
+        return self.age >= 18
+
+
+#pytest unit tests
+
+import pytest
+from user import User
+
+def test_user_can_vote():
+    user = User("Alice", 20)
+    assert user.can_vote() is True
+
+def test_user_cannot_vote():
+    user = User("Bob", 16)
+    assert user.can_vote() is False
+
+def test_user_exactly_18():
+    user = User("Charlie", 18)
+    assert user.can_vote() is True
+
+def test_user_negative_age():
+    user = User("Dave", -5)
+    assert user.can_vote() is False
+#Run the tests
+
+pytest test_user.py
+
