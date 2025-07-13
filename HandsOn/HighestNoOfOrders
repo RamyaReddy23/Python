@@ -1,0 +1,21 @@
+#	How can we get the nth highest number of orders a single customer has?
+from collections import Counter
+
+def nth_highest_order_count(orders, n):
+    # Count orders per customer
+    customer_order_counts = Counter(orders)
+
+    # Get all order counts sorted in descending order
+    sorted_counts = sorted(customer_order_counts.values(), reverse=True)
+
+    # Check if n is within bounds
+    if n <= len(sorted_counts):
+        return sorted_counts[n - 1]
+    else:
+        return None  # n is too large
+
+# Example usage
+orders = ['cust1', 'cust2', 'cust1', 'cust3', 'cust2', 'cust1', 'cust4', 'cust2', 'cust3']
+nth = 2
+result = nth_highest_order_count(orders, nth)
+print(f"The {nth} highest number of orders by a single customer is: {result}")
