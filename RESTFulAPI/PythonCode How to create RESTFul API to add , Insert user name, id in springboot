@@ -1,0 +1,44 @@
+#How to create RESTFul API to add , Insert user name, id in springboot
+
+#Install Flask
+
+pip install flask
+
+#create the API
+
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# In-memory storage for users
+users = []
+
+# Route to add a new user
+@app.route('/api/users', methods=['POST'])
+def add_user():
+    data = request.get_json()
+    user_id = data.get('id')
+    name = data.get('name')
+
+    if not user_id or not name:
+        return jsonify({'error': 'ID and name are required'}), 400
+
+    users.append({'id': user_id, 'name': name})
+    return jsonify({'message': 'User added successfully'}), 201
+
+# Route to get all users
+@app.route('/api/users', methods=['GET'])
+def get_users():
+    return jsonify(users)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+#Example Usage:
+
+{
+  "id": 1,
+  "name": "Ramya"
+}
